@@ -16,7 +16,7 @@
     font-weight: 500;
   }
   &__description {
-    color: #8a8a8a;
+    color: #858585;
   }
 }
 </style>

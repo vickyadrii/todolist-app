@@ -1,7 +1,7 @@
 <script setup>
-import BaseTitle from "@/components/common/BaseTitle.vue";
+import HomeComponent from "@/features/home/HomeComponent.vue";
 </script>
 
 <template>
-  <BaseTitle />
+  <HomeComponent />
 </template>
