@@ -78,12 +78,4 @@ const handleBackgroundClick = (event) => {
     }
   }
 }
-.modal-fade-enter-active .modal__content,
-.modal-fade-leave-active .modal__content {
-  transition: transform 100ms;
-}
-.modal-fade-enter-from .modal__content,
-.modal-fade-leave-to .modal__content {
-  transform: scale(0.9);
-}
 </style>
