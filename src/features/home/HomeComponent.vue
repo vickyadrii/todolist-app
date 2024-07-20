@@ -4,6 +4,6 @@ import TodoLists from "./components/TodoLists.vue";
 </script>
 
 <template>
-  <BaseTitle />
+  <BaseTitle name="Vicky" />
   <TodoLists />
 </template>

@@ -1,6 +1,12 @@
+<script setup>
+const props = defineProps({
+  name: String,
+});
+</script>
+
 <template>
   <div class="content">
-    <h1 class="content__title">Good Evening, Vicky 🤩</h1>
+    <h1 class="content__title">Good Evening, {{ props.name }} 🤩</h1>
     <p class="content__description">It's Monday, 25 September 2024</p>
   </div>
 </template>

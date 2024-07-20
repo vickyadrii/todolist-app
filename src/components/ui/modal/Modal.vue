@@ -52,7 +52,7 @@ const handleBackgroundClick = (event) => {
   &__content {
     padding: 40px;
     width: 760px;
-    height: 700px;
+    max-height: 700px;
     background: #ffffff;
     border-radius: 16px;
     position: relative;

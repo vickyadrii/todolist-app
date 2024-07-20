@@ -1,5 +1,5 @@
 <script setup>
-import { dummyTasks } from "@/constants";
+// import { dummyTasks } from "@/constants";
 import { ref } from "vue";
 import ModalAddForm from "./ModalAddForm.vue";
 
@@ -7,12 +7,17 @@ import iconPlus from "@/assets/icons/ic_plus.svg";
 import iconOption from "@/assets/icons/ic_option.svg";
 import Checkbox from "@/components/ui/checkbox/Checkbox.vue";
 
-const todos = ref(dummyTasks);
+const todos = ref([]);
 let showModal = ref(false);
 
 const handleShowModal = () => {
   showModal.value = !showModal.value;
 };
+
+const handleSubmit = (data) => {
+  todos.value.push(data.todoList);
+  data.handleClearTodo();
+}
 </script>
 
 <template>
@@ -38,7 +43,7 @@ const handleShowModal = () => {
   </div>
 
   <!-- Modal Add Form -->
-  <ModalAddForm :is-open="showModal" :on-close="handleShowModal" />
+  <ModalAddForm :is-open="showModal" :on-close="handleShowModal" @createTodo="handleSubmit" />
 </template>
 
 <style lang="scss" scoped>
