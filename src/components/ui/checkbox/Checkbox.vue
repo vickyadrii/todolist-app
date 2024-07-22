@@ -1,7 +1,21 @@
 <!-- eslint-disable vue/multi-word-component-names -->
+<script setup>
+const props = defineProps({
+  modelValue: {
+    type: String,
+    required: true
+  }
+});
+
+const emit = defineEmits(['update:modelValue']);
+
+const updateValue = (event) => {
+  emit('update:modelValue', event.target.checked ? 'done' : 'todo');
+};
+</script>
 
 <template>
-  <input type="checkbox" />
+  <input type="checkbox" :checked="props.modelValue === 'done'" @change="updateValue" />
 </template>
 
 <style lang="scss" scoped>

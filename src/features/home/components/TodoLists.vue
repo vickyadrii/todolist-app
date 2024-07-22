@@ -1,6 +1,6 @@
 <script setup>
 // import { dummyTasks } from "@/constants";
-import { ref } from "vue";
+import { ref, onMounted, watch } from "vue";
 import ModalAddForm from "./ModalAddForm.vue";
 
 import iconPlus from "@/assets/icons/ic_plus.svg";
@@ -17,7 +17,18 @@ const handleShowModal = () => {
 const handleSubmit = (data) => {
   todos.value.push(data.todoList);
   data.handleClearTodo();
-}
+};
+
+onMounted(() => {
+  const savedTodos = localStorage.getItem('todo-lists');
+  if (savedTodos) {
+    todos.value = JSON.parse(savedTodos);
+  }
+});
+
+watch(todos, (newTodos) => {
+  localStorage.setItem('todo-lists', JSON.stringify(newTodos));
+}, { deep: true });
 </script>
 
 <template>
@@ -25,12 +36,12 @@ const handleSubmit = (data) => {
     <button @click="handleShowModal"><img :src="iconPlus" alt="ic_plus" /> New Task</button>
   </div>
 
-  <div class="todos">
-    <h3 class="todos__title">Tasks</h3>
+  <div class="tasks">
+    <h3 class="tasks__title">Tasks</h3>
     <div class="todo-lists" v-if="todos.length > 0">
-      <div class="todo" v-for="todo in todos" :key="todo.id">
+      <div :class="['todo', todo.status === 'done' && 'todo__done']" v-for="todo in todos" :key="todo.id">
         <div class="todo__title-content">
-          <Checkbox :id="todo.task" />
+          <Checkbox :id="todo.task" v-model="todo.status" checkedValue="done" uncheckedValue="todo" />
           <label :for="todo.task">{{ todo.task }}</label>
         </div>
 
@@ -72,7 +83,7 @@ const handleSubmit = (data) => {
   }
 }
 
-.todos {
+.tasks {
   margin-top: 28px;
   display: flex;
   flex-direction: column;
@@ -103,6 +114,14 @@ const handleSubmit = (data) => {
 
       label {
         color: #6c6c6c;
+      }
+    }
+    
+    &__done {
+      background: #e0dede;
+
+      label {
+        text-decoration: line-through;
       }
     }
   }
